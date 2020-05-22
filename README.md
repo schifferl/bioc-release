@@ -1,14 +1,17 @@
 # bioc-release
-A More Complete Bioconductor Release Container
-
-How I build the container:
 
 ```
-docker build -t schifferl/bioc-release:latest - < Dockerfile
-```
+FROM rocker/rstudio:latest
 
-How I start the container:
+RUN apt-get update\
+ && apt-get upgrade -y\
+ && apt-get install qpdf -y\
+ && apt-get install ssh -y\
+ && apt-get install texlive-full -y\
+ && r -e "utils::install.packages('BiocManager')"\
+ && r -e "BiocManager::install(ask = FALSE)"\
+ && r -e "BiocManager::install('devtools')"\
+ && r -e "BiocManager::install('tidyverse')"\
+ && r -e "BiocManager::install('tidymodels')"
 
-```
-read -s 'REPLY?bioc-passwd:'; echo; docker run -d --name bioc-release --restart unless-stopped -p 7000:8787 -e PASSWORD=$REPLY -e USER=bioc -v /Users/$USER/.ssh:/home/bioc/.ssh schifferl/bioc-release:latest; unset REPLY
 ```
