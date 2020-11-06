@@ -12,6 +12,7 @@ RUN apt-get update\
  && apt-get install -y libcairo2-dev\
  && apt-get install -y libfontconfig1-dev\
  && apt-get install -y libgdal-dev\
+ && apt-get install -y libglpk-dev\
  && apt-get install -y liblapack-dev\
  && apt-get install -y libmagick++-dev\
  && apt-get install -y libomp-dev\
