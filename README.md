@@ -1,19 +1,23 @@
 # bioc-release
 
 ```
-FROM rocker/rstudio:latest
+FROM rocker/rstudio:4.1.0
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update\
  && apt-get upgrade -y\
  && apt-get install -y curl\
+ && apt-get install -y imagemagick\
  && apt-get install -y libblas-dev\
  && apt-get install -y libcairo2-dev\
  && apt-get install -y libfontconfig1-dev\
+ && apt-get install -y libfribidi-dev\
  && apt-get install -y libgdal-dev\
  && apt-get install -y libgit2-dev\
  && apt-get install -y libglpk-dev\
+ && apt-get install -y libgsl-dev\
+ && apt-get install -y libharfbuzz-dev\
  && apt-get install -y liblapack-dev\
  && apt-get install -y libmagick++-dev\
  && apt-get install -y libomp-dev\
@@ -43,6 +47,7 @@ RUN apt-get update\
  && r -e "BiocManager::install('TreeSummarizedExperiment')"\
  && r -e "BiocManager::install('devtools')"\
  && r -e "BiocManager::install('roxygen2')"\
+ && r -e "BiocManager::install('snakecase')"\
  && r -e "BiocManager::install('tidymodels')"\
  && r -e "BiocManager::install('tidyverse')"
 
